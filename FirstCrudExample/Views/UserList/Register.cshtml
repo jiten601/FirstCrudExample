@@ -1,0 +1,65 @@
+﻿@model FirstCrudExample.Models.RegisterModel
+
+<style>
+    body {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+</style>
+
+<div class="row justify-content-center">
+    <div class="col-md-1 col-lg-6">
+        <div class="card shadow-sm mt-8">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0 text-center">Register</h5>
+            </div>
+            <div class="card-body">
+                <form asp-controller="Userlist" asp-action="Register" method="post">
+                    <div class="mb-3">
+                        <label asp-for="UserName" class="form-label fw-semibold">Username</label>
+                        <input asp-for="UserName" class="form-control" placeholder="Enter your username" />
+                        <span asp-validation-for="UserName" class="text-danger small"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Phone" class="form-label fw-semibold">Phone</label>
+                        <input asp-for="Phone" class="form-control" placeholder="Enter your phone number" />
+                        <span asp-validation-for="Phone" class="text-danger small"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Email" class="form-label fw-semibold">Email</label>
+                        <input asp-for="Email" class="form-control" placeholder="Enter your email address" />
+                        <span asp-validation-for="Email" class="text-danger small"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="UserPassword" class="form-label fw-semibold">Password</label>
+                        <input asp-for="UserPassword" type="password" class="form-control" placeholder="Enter your password" />
+                        <span asp-validation-for="UserPassword" class="text-danger small"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="ConfirmPassword" class="form-label fw-semibold">Confirm Password</label>
+                        <input asp-for="ConfirmPassword" type="password" class="form-control" placeholder="Confirm your password" />
+                        <span asp-validation-for="ConfirmPassword" class="text-danger small"></span>
+                    </div>
+
+                    <div class="d-grid mb-3">
+                        <button type="submit" class="btn btn-success btn-lg">Register</button>
+                    </div>
+
+                    <div asp-validation-summary="ModelOnly" class="text-danger mt-2"></div>
+                </form>
+
+                <hr class="my-4" />
+
+                <div class="text-center">
+                    <p class="mb-0 d-inline fw-semibold"><b></b>Already have an account?</p>
+                    <a asp-controller="Userlist" asp-action="Login" class="btn btn-primary btn-sm ms-2">Back to Login</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

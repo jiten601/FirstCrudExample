@@ -1,0 +1,35 @@
+﻿@model FirstCrudExample.Models.Faculty
+
+@{
+    ViewData["Title"] = "Faculty Details";
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card shadow-sm">
+                <div class="card-header bg-info text-white">
+                    <h4 class="mb-0">Faculty Details</h4>
+                </div>
+                <div class="card-body">
+                    <dl class="row mb-0">
+                        <dt class="col-sm-4">
+                            @Html.DisplayNameFor(model => model.FacultyName)
+                        </dt>
+                        <dd class="col-sm-8">
+                            @Html.DisplayFor(model => model.FacultyName)
+                        </dd>
+                    </dl>
+                </div>
+                <div class="card-footer d-flex justify-content-between">
+                    <a asp-action="Edit" asp-route-id="@Model?.FacultyId" class="btn btn-warning">
+                        <i class="bi bi-pencil-square"></i> Edit
+                    </a>
+                    <a asp-action="Index" class="btn btn-secondary">
+                        <i class="bi bi-arrow-left"></i> Back to List
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

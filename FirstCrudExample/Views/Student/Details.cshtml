@@ -1,0 +1,42 @@
+﻿@model FirstCrudExample.Models.Student
+
+@{
+    ViewData["Title"] = "Student Details";
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card shadow-sm">
+                <div class="card-header bg-info text-white">
+                    <h4 class="mb-0">
+                        <i class="bi bi-person-vcard-fill"></i> Student Details
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <dl class="row mb-0">
+                        <dt class="col-sm-4">@Html.DisplayNameFor(m => m.StdName)</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(m => m.StdName)</dd>
+
+                        <dt class="col-sm-4">@Html.DisplayNameFor(m => m.StdAddress)</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(m => m.StdAddress)</dd>
+
+                        <dt class="col-sm-4">@Html.DisplayNameFor(m => m.JoinDate)</dt>
+                        <dd class="col-sm-8">@Model.JoinDate.ToString("yyyy-MM-dd")</dd>
+
+                        <dt class="col-sm-4">@Html.DisplayNameFor(m => m.Faculty)</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(m => m.Faculty.FacultyName)</dd>
+                    </dl>
+                </div>
+                <div class="card-footer d-flex justify-content-between">
+                    <a asp-action="Edit" asp-route-sid="@Model?.StdId" class="btn btn-warning">
+                        <i class="bi bi-pencil-square"></i> Edit
+                    </a>
+                    <a asp-action="Index" class="btn btn-secondary">
+                        <i class="bi bi-arrow-left"></i> Back to List
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

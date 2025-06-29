@@ -1,0 +1,45 @@
+﻿@model FirstCrudExample.Models.LoginModel
+
+<style>
+    body {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+</style>
+
+<div class="row justify-content-center mt-5">
+    <div class="col-md-6 col-lg-5">
+        <div class="card shadow rounded-4 border-0">
+            <div class="card-header bg-primary text-white text-center rounded-top-4">
+                <h4 class="mb-0">Login</h4>
+            </div>
+            <div class="card-body p-4 fw-semibold">
+                <form asp-controller="Home" asp-action="Login" method="post">
+                    <div class="mb-3">
+                        <label asp-for="LoginId" class="form-label">Username</label>
+                        <input asp-for="LoginId" class="form-control rounded-pill px-3 py-2" placeholder="Enter your username" />
+                        <span asp-validation-for="LoginId" class="text-danger small"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="UserPassword" class="form-label">Password</label>
+                        <input asp-for="UserPassword" type="password" class="form-control rounded-pill px-3 py-2" placeholder="Enter your password" />
+                        <span asp-validation-for="UserPassword" class="text-danger small"></span>
+                    </div>
+                    <div class="d-grid mb-3">
+                        <button type="submit" class="btn btn-primary btn-lg rounded-pill">Login</button>
+                    </div>
+
+                    <div class="text-center">
+                        <p class="mb-0 fw-semibold">
+                            Don't have an account?
+                            <a asp-controller="Userlist" asp-action="Register" class="fw-semibold text-decoration-none">Register here</a>
+                        </p>
+                    </div>
+
+                    <div asp-validation-summary="ModelOnly" class="text-danger small mt-3"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

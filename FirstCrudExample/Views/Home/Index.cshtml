@@ -1,0 +1,138 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+<style>
+    body {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .home-wrapper {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        padding: 40px 30px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+    }
+
+        .home-wrapper:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .home-wrapper h1 {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .home-wrapper p {
+            color: #6c757d;
+            font-size: 1.1rem;
+        }
+
+    .btn-lg-custom {
+        min-width: 180px;
+        font-size: 1.1rem;
+        padding: 12px 25px;
+        border-radius: 25px;
+        transition: all 0.3s ease;
+        font-weight: 500;
+        border: none;
+    }
+
+        .btn-lg-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+    .btn-primary {
+        background: linear-gradient(45deg, #007bff, #0056b3);
+    }
+
+        .btn-primary:hover {
+            background: linear-gradient(45deg, #0056b3, #004085);
+        }
+
+    .btn-success {
+        background: linear-gradient(45deg, #28a745, #1e7e34);
+    }
+
+        .btn-success:hover {
+            background: linear-gradient(45deg, #1e7e34, #155724);
+        }
+
+    .stats-section {
+        margin-top: 30px;
+    }
+
+    .stat-card {
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 15px;
+        padding: 20px;
+        margin: 10px 0;
+        text-align: center;
+        transition: all 0.3s ease;
+    }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+    .stat-number {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #007bff;
+        display: block;
+    }
+
+    .stat-label {
+        color: #6c757d;
+        font-size: 0.9rem;
+    }
+
+    .welcome-badge {
+        background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+        color: white;
+        padding: 6px 16px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 500;
+        margin-bottom: 20px;
+        display: inline-block;
+    }
+
+    .btn i {
+        transition: transform 0.3s ease;
+    }
+
+    .btn:hover i {
+        transform: scale(1.1);
+    }
+</style>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10 col-lg-8 mt-4">
+            <div class="home-wrapper text-center">
+                <div class="welcome-badge">
+                    🎓 Education Portal
+                </div>
+
+                <h1 class="display-5 mb-3">Welcome to the Management System</h1>
+                <p class="lead mb-4"><b>Manage Faculty and Student records easily and efficiently</b></p>
+
+                <div class="d-flex justify-content-center gap-3 flex-wrap mb-4">
+                    <a asp-controller="Faculty" asp-action="Index" class="btn btn-primary btn-lg-custom">
+                        <i class="bi bi-people-fill me-2"></i>Faculty
+                    </a>
+                    <a asp-controller="Student" asp-action="Index" class="btn btn-success btn-lg-custom">
+                        <i class="bi bi-mortarboard-fill me-2"></i>Student
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

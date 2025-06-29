@@ -1,0 +1,39 @@
+﻿@model FirstCrudExample.Models.Faculty
+
+@{
+    ViewData["Title"] = "Edit Faculty";
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card shadow-sm">
+                <div class="card-header bg-warning text-dark">
+                    <h4 class="mb-0">Edit Faculty</h4>
+                </div>
+                <div class="card-body">
+                    <form method="post" asp-action="Edit" asp-antiforgery="true">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                        <input type="hidden" asp-for="FacultyId" />
+
+                        <div class="mb-3">
+                            <label asp-for="FacultyName" class="form-label"></label>
+                            <input asp-for="FacultyName" class="form-control" />
+                            <span asp-validation-for="FacultyName" class="text-danger"></span>
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <a asp-action="Index" class="btn btn-secondary">
+                                <i class="bi bi-arrow-left"></i> Back to List
+                            </a>
+                            <button type="submit" class="btn btn-success">
+                                <i class="bi bi-save"></i> Save
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
