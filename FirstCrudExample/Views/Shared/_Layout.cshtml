@@ -26,17 +26,22 @@
                     <li class="nav-item">
                         <a class="nav-link active" asp-controller="Home" asp-action="Index">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" asp-controller="Faculty" asp-action="Index">Faculty</a>
-                    </li>
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link active" asp-controller="Faculty" asp-action="Index">Faculty</a>
+                        </li>
+                    }
+
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li class="nav-item">
                             <a class="nav-link active" asp-controller="Student" asp-action="Index">Student</a>
-                        </li>                        
+                        </li>
                     }
-                    
                 </ul>
+
                 @if (User.Identity.IsAuthenticated)
                 {
                     <!-- Right side: Logout Button only -->

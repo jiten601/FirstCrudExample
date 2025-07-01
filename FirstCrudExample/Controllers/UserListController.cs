@@ -48,7 +48,7 @@ namespace FirstCrudExample.Controllers
             _context.SaveChanges();
 
             TempData["SuccessMessage"] = "Registration successful. Please login.";
-            return RedirectToAction("Login");
+            return RedirectToAction("Login", "Home");
         }
     }
 }

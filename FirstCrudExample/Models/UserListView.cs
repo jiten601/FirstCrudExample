@@ -12,6 +12,9 @@ public class LoginModel
     [Required(ErrorMessage = "Password is required.")]
     [DataType(DataType.Password)]
     public string UserPassword { get; set; } = null!;
+
+    public bool RememberMe { get; set; }
+
 }
 
 // Model for Register
@@ -30,13 +33,14 @@ public class RegisterModel
 
     [Required(ErrorMessage = "Password is required.")]
     [DataType(DataType.Password)]
+    [MinLength(6, ErrorMessage = "Password must be at least 6 characters long.")]
     public string UserPassword { get; set; } = null!;
 
     [Required(ErrorMessage = "Confirm password is required.")]
     [DataType(DataType.Password)]
     [Compare(nameof(UserPassword), ErrorMessage = "Passwords do not match.")]
+    [MinLength(6, ErrorMessage = "Password must be at least 6 characters long.")]
     public string ConfirmPassword { get; set; } = null!;
-
 }
 
 // Model for Change Password
