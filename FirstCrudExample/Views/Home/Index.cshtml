@@ -113,6 +113,18 @@
     }
 </style>
 
+@if (TempData["WelcomeMessage"] != null)
+{
+    <div class="container mt-3 text-center">
+        <div id="welcomeAlert" class="alert alert-success fs-6 fw-normal py-2 px-3 d-inline-block rounded-pill shadow-sm fw-semibold">
+            @TempData["WelcomeMessage"]
+        </div>
+    </div>
+}
+
+
+
+
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-10 col-lg-8 mt-4">
@@ -136,3 +148,21 @@
         </div>
     </div>
 </div>
+
+
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        const alertBox = document.getElementById('welcomeAlert');
+        if (alertBox) {
+            setTimeout(() => {
+                alertBox.classList.add('fade');
+                alertBox.classList.add('show'); // Ensure show class for fade animation
+
+                // After fade animation (500ms), remove from DOM
+                setTimeout(() => {
+                    alertBox.remove();
+                }, 500);
+            }, 3000); // 3000ms = 3 seconds
+        }
+    });
+</script>

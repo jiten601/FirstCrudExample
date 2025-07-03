@@ -45,6 +45,7 @@ namespace FirstCrudExample.Controllers
         }
 
         // GET: Faculty/Create
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View();
@@ -55,6 +56,7 @@ namespace FirstCrudExample.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create([Bind("FacultyId,FacultyName")] Faculty faculty)
         {
             if (ModelState.IsValid)

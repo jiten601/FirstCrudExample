@@ -29,6 +29,7 @@
             </div>
             <div class="card-body p-4 fw-semibold">
                 <form asp-controller="Home" asp-action="Login" method="post">
+                    <input type="hidden" name="returnUrl" value="@ViewData["ReturnUrl"]"/>
                     <div class="mb-3">
                         <label asp-for="LoginId" class="form-label">UserID</label>
                         <input asp-for="LoginId" class="form-control rounded-pill px-3 py-2" placeholder="Enter your UserID" />

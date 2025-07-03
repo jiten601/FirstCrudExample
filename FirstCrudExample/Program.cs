@@ -14,7 +14,7 @@ namespace FirstCrudExample
                     options.AccessDeniedPath = "/Home/AccessDenied";
                     options.ExpireTimeSpan=TimeSpan.FromDays(1);
                 });
-            builder.Services.AddAuthentication();
+            builder.Services.AddAuthorization();
             builder.Services.AddDbContext<Models.LunarDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("ConString")));
 

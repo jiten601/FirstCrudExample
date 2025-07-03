@@ -12,7 +12,7 @@ namespace FirstCrudExample.Controllers
         {
             _context = context;
         }
-
+         
         // =======================
         // REGISTER - GET
         // =======================
@@ -41,7 +41,7 @@ namespace FirstCrudExample.Controllers
                 Email = registerData.Email,
                 UserPassword = registerData.UserPassword,
                 LoginStatus = false,
-                UserTypeId = 1
+                UserTypeId = 1//NormalUser
             };
 
             _context.Userlists.Add(user);

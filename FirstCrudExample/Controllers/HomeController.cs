@@ -8,29 +8,41 @@ namespace FirstCrudExample.Controllers
     public class HomeController : Controller
     {
         private readonly LunarDbContext _context;
-        public HomeController(LunarDbContext context) { 
-            _context=context;
+        public HomeController(LunarDbContext context)
+        {
+            _context = context;
         }
-        public IActionResult Index() {
+        public IActionResult Index()
+        {
+            if (User.Identity != null && User.Identity.IsAuthenticated)
+            {
+                var userName = User.Claims.FirstOrDefault(c => c.Type == "UserName")?.Value;
+                ViewBag.UserName = userName;
+            }
+            else
+            {
+                ViewBag.UserName = null;
+            }
+
             return View();
         }
 
         [HttpGet]
-        public IActionResult Login()
+        public IActionResult Login(String returnUrl = null)
         {
             if (User.Identity != null && User.Identity.IsAuthenticated)
             {
                 // User is already logged in, redirect to Home/Index
                 return RedirectToAction("Index", "Home");
             }
-
+            ViewData["ReturnUrl"] = returnUrl;
             return View();
         }
 
-
+      
 
         [HttpPost]
-        public async Task<IActionResult> LoginAsync(LoginModel login)
+        public async Task<IActionResult> LoginAsync(LoginModel login, string returnUrl = null)
         {
             if (ModelState.IsValid)
             {
@@ -55,6 +67,8 @@ namespace FirstCrudExample.Controllers
                     ClaimsIdentity identity = new ClaimsIdentity(claims, "MyCookieAuth");
                     ClaimsPrincipal principal = new ClaimsPrincipal(identity);
 
+
+
                     // Set session timeout based on RememberMe
                     var authProperties = new AuthenticationProperties
                     {
@@ -66,18 +80,32 @@ namespace FirstCrudExample.Controllers
 
                     await HttpContext.SignInAsync("MyCookieAuth", principal, authProperties);
 
-                    return RedirectToAction(nameof(Index), nameof(Student));
+                    // ✅ Set TempData greeting message
+                    TempData["WelcomeMessage"] = $"Welcome to Our System, {user.UserName}!";
+
+                    if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                    {
+                        return Redirect(returnUrl);
+                    }
+
+                    return RedirectToAction("Index", "Home");
                 }
             }
 
             ModelState.AddModelError("", "Login failed. Try again.");
+            ViewData["ReturnUrl"] = returnUrl;
             return View(login);
         }
-
+        
         public async Task<IActionResult> LogoutAsync()
         {
             await HttpContext.SignOutAsync("MyCookieAuth");
             return RedirectToAction(nameof(Login));
+        }
+
+        public IActionResult AccessDenied()
+        {
+            return View();
         }
     }
 }
