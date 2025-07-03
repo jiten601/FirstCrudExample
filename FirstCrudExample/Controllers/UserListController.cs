@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using FirstCrudExample.Models;
+﻿using FirstCrudExample.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
 namespace FirstCrudExample.Controllers
@@ -12,13 +14,14 @@ namespace FirstCrudExample.Controllers
         {
             _context = context;
         }
-         
+
         // =======================
         // REGISTER - GET
         // =======================
         [HttpGet]
         public IActionResult Register()
         {
+            ViewBag.UserTypes = _context.Usertypes.ToList();
             return View(new RegisterModel());
         }
 
@@ -26,12 +29,28 @@ namespace FirstCrudExample.Controllers
         // REGISTER - POST
         // =======================
         [HttpPost]
-        public IActionResult Register(RegisterModel registerData)
+        public IActionResult Register(RegisterModel registerData, int UserTypeId)
         {
+            ViewBag.UserTypes = _context.Usertypes.ToList();
+
             if (!ModelState.IsValid)
                 return View(registerData);
 
-            int newId = _context.Userlists.Any() ? _context.Userlists.Max(u => u.UserId) + 1 : 1;
+            // Find the smallest missing UserId
+            int newId = 1;
+            var userIds = _context.Userlists
+                                  .OrderBy(u => u.UserId)
+                                  .Select(u => u.UserId)
+                                  .ToList();
+
+            foreach (var id in userIds)
+            {
+                if (id == newId)
+                    newId++;
+                else
+                    break; // found the gap
+            }
+
 
             var user = new Userlist
             {
@@ -41,7 +60,7 @@ namespace FirstCrudExample.Controllers
                 Email = registerData.Email,
                 UserPassword = registerData.UserPassword,
                 LoginStatus = false,
-                UserTypeId = 1//NormalUser
+                UserTypeId = UserTypeId // Assigned from dropdown
             };
 
             _context.Userlists.Add(user);
@@ -50,5 +69,25 @@ namespace FirstCrudExample.Controllers
             TempData["SuccessMessage"] = "Registration successful. Please login.";
             return RedirectToAction("Login", "Home");
         }
+
+        //Narbar Usertype
+        [Authorize(Roles = "Admin")]
+        public IActionResult UserByType(string typeName)
+        {
+            if (string.IsNullOrEmpty(typeName))
+            {
+                TempData["ErrorMessage"] = "Invalid user type selected.";
+                return RedirectToAction("Index", "Home");
+            }
+
+            var users = _context.Userlists
+                .Include(u => u.UserType)
+                .Where(u => u.UserType.TypeName == typeName)
+                .ToList();
+
+            ViewBag.UserTypeName = typeName;
+            return View(users);
+        }
+
     }
 }

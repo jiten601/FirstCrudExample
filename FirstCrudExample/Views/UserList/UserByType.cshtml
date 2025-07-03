@@ -1,0 +1,77 @@
+﻿@model IEnumerable<FirstCrudExample.Models.Userlist>
+
+@{
+    ViewData["Title"] = "Users by Type";
+}
+
+<style>
+    /* Custom table header */
+    .table-custom-header {
+        background-color: #4a90e2; /* Primary blue */
+        color: white;
+    }
+
+    /* Custom striped rows */
+    .table-custom-striped tbody tr:nth-of-type(odd) {
+        background-color: #f8f9fa; /* Light gray */
+    }
+
+    .table-custom-striped tbody tr:nth-of-type(even) {
+        background-color: #ffffff; /* White */
+    }
+
+    /* Custom alert */
+    .alert-custom {
+        background-color: #e6f3ff; /* Light blue */
+        color: #004085; /* Darker blue text */
+        border-color: #b8daff;
+    }
+
+    /* Custom button */
+    .btn-custom {
+        background-color: #28a745; /* Green */
+        border-color: #28a745;
+        color: white;
+    }
+    .btn-custom:hover {
+        background-color: #218838; /* Darker green on hover */
+        border-color: #1e7e34;
+    }
+</style>
+
+<div class="container mt-4">
+    <h2 class="mb-4">Users: @ViewBag.UserTypeName</h2>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-custom">No users found for this user type.</div>
+    }
+    else
+    {
+        <table class="table table-bordered table-custom-striped">
+            <thead class="table-custom-header table-dark">
+                <tr>
+                    <th>UserID</th>
+                    <th>User Name</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model)
+                {
+                    <tr>
+                        <td>@user.UserId</td>
+                        <td>@user.UserName</td>
+                        <td>@user.PhoneNumber</td>
+                        <td>@user.Email</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+    <a asp-controller="Home" asp-action="Index" class="btn btn-custom mt-3">
+        <i class="bi bi-arrow-left"></i> Back to Home
+    </a>
+</div>

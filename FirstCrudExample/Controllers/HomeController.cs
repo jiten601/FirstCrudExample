@@ -58,11 +58,11 @@ namespace FirstCrudExample.Controllers
                     await _context.SaveChangesAsync();
 
                     List<Claim> claims = new List<Claim>()
-            {
-                new Claim(ClaimTypes.Name, user.UserId.ToString()),
-                new Claim("UserName", user.UserName),
-                new Claim(ClaimTypes.Role, user.UserType.TypeName)
-            };
+                {
+                    new Claim(ClaimTypes.Name, user.UserId.ToString()),
+                    new Claim("UserName", user.UserName),
+                    new Claim(ClaimTypes.Role, user.UserType.TypeName)
+                };
 
                     ClaimsIdentity identity = new ClaimsIdentity(claims, "MyCookieAuth");
                     ClaimsPrincipal principal = new ClaimsPrincipal(identity);
